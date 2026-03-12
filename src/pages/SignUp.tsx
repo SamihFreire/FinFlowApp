@@ -1,25 +1,93 @@
 import { useState } from "react"
+import { z, ZodError } from "zod"
+import { AxiosError } from "axios"
+import { useNavigate } from "react-router"
+
+import { api } from "../services/api"
+
 import { Input } from "../components/Input"
 import { Button } from "../components/Button"
 
+// Regras de validação utilizando ZOD
+const signUpSchema = z.object({
+    name: z.string().trim().min(1, { message: "Informe o nome" }),
+    age: z.coerce.number().min(1, { message: "Informe a idade" })
+        .int({ message:"Idade deve ser número inteiro"})
+        .positive({ message: "A idade deve ser um número positivo" }),
+    email: z.email({ message: "E-mail inválido" }),
+    password: z
+        .string()
+        .min(8, { message: "Senha deve ter pelo menos 8 dígitos" })
+        .regex(/[A-Z]/, { message: "Deve conter pelo menos uma letra maiúscula" })
+        .regex(/[a-z]/, { message: "Deve conter pelo menos uma letra minúscula" })
+        .regex(/[0-9]/, { message: "Deve conter pelo menos um número" })
+        .regex(/[\W_]/, { message: "Deve conter pelo menos um símbolo (ex: @, #, $, !)" }),
+    passwordConfirm: z.string({ message: "Confirme a senha" })
+}).refine((data)=> data.password === data.passwordConfirm, { // Validamos se a senhas são iguais
+    message: "As senhas não são iguais",
+    path: ["passwordConfirm"],
+})
+
 export function SignUp() {
     const [name, setName] = useState("");
+    const [age, setAge] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
+    const navigate = useNavigate();
 
-    function onSubmit(e: React.FormEvent) {
+    async function onSubmit(e: React.FormEvent) {
         e.preventDefault();
 
-        console.log(name, email, password, passwordConfirm);
+        try {
+            setIsLoading(true); // Ativando o carregamento
+            
+            const data = signUpSchema.parse({
+                name,
+                age,
+                email,
+                password,
+                passwordConfirm,
+            });
+
+            await api.post("/User", data);
+
+            if(confirm("Cadastrado com sucesso. Deseja ir para tela de Login?")){
+                navigate("/");
+            }
+
+        } catch (error) {
+            console.log(error);
+
+            // Erro vindo da validação do Zod
+            // Verificamos se o erro é uma instacia de Zod
+            if(error instanceof ZodError) {
+                return alert(error.issues[0].message)
+            }
+            
+            // Retornando o erro recebido via API
+            if(error instanceof AxiosError) {
+                return alert(error.response?.data.message);
+            }
+
+            alert("Não foi possível cadastrar!");
+        } finally {
+            setIsLoading(false); // Desativando carregamento
+        }
     }
 
     return (
         <form onSubmit={onSubmit} className="w-full flex flex-col gap-4"> 
             <Input required legend="Nome" type="" placeholder="Seu Nome" 
             onChange={(e) => setName(e.target.value)}/>
+
+            <Input required legend="Idade" type="" inputMode="numeric" placeholder="Sua Idade" value={age} onChange={(e) => { 
+                    const onlyNumbers = e.target.value.replace(/\D/g, "")
+                    setAge(onlyNumbers)
+                }}
+            />
 
             <Input required legend="E-mail" type="email" placeholder="seu@email.com" 
             onChange={(e) => setEmail(e.target.value)}/>

@@ -44,7 +44,6 @@ export function SignIn() {
 
             // Realizando o login na API e obtendo token JWT
             const response = await api.post("/Login", data) 
-            console.log(response.data);
             
         } catch (error) {
             console.log(error);
