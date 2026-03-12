@@ -1,0 +1,13 @@
+<svg width="250" height="80" viewBox="0 0 250 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="250" height="80" fill="#f9fbfa" rx="10"/>
+
+  <path d="M40 25C40 25 45.196 30 45.196 30.5M45.196 30.5C45.196 31 43.082 35 43.082 35.5M43.082 35.5C43.082 36 48.068 39 48.068 39.5M48.068 39.5C48.068 40 46 44 46 44.5M46 44.5C46 45 50.857 48 50.857 48.5C50.857 49 48 53 48 53.5" stroke="#2cb178" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="48" cy="40" r="18" stroke="#1f2523" stroke-width="1.5"/>
+
+  <text x="80" y="50" font-family="'Open Sans', sans-serif" font-size="34" font-weight="bold">
+    <tspan fill="#1f2523">Fin</tspan>
+    <tspan fill="#2cb178">Flow</tspan>
+  </text>
+  
+  <text x="80" y="70" font-family="'Open Sans', sans-serif" font-size="14" fill="#4d5c57" letter-spacing="0.5">Gestão Inteligente</text>
+</svg>
