@@ -9,11 +9,10 @@ export function Select({ legend, children, ...rest }: Props) {
                 <legend className="uppercase text-xxs mb-2 text-inherit">{legend}</legend>
             )}
 
-            <select className="w-full h-12 rounded-lg border 
+            <select className="w-full h-12 rounded-lg border-2 uppercase 
                 border-gray-300 px-4 text-sm text-gray-100 
                 bg-transparent outline-none focus:border-2 focus:border-green-100 placeholder-gray-300" 
-                {...rest} 
-                defaultValue={rest.defaultValue ?? ""}
+                {...rest}
             >
                 <option value="" disabled hidden>Selecione</option>
                 {children}
