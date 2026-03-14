@@ -61,7 +61,7 @@ export function Transaction() {
             const data = transactionSchema.parse({
                 title,
                 description,
-                amount: amount,
+                amount,
                 transactionType: Number(transactionType),
                 categoryID: Number(category),
                 userId:  Number(user)
@@ -104,6 +104,7 @@ export function Transaction() {
             setCategories(
                 response.data.categories.map((category) => ({
                     id: category.id,
+                    title: category.title,
                     description: category.description,
                     categoryType: category.categoryType
                 }))
@@ -182,7 +183,7 @@ export function Transaction() {
                         // Para cada chave de categoria buscamos na lista de categorias o seu nome
                         categories.map((category) => (
                             <option key={category.id} value={category.id}>
-                                {category.description}
+                                {category.title}
                             </option>
                         ))
                     }
