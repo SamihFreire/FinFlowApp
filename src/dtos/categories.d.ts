@@ -4,6 +4,7 @@ type CategoriesApiResponse ={
 
 type Category = {
     id: number,
+    title: string,
     description: string,
     categoryType: number
 }

@@ -6,6 +6,7 @@ import { api } from "../services/api"
 
 import { Input } from "../components/Input"
 import { Button } from "../components/Button"
+import { useAuth } from "../hooks/useAuth"
 
 const signInScheme = z.object({
     email: z.email({ message: "E-mail inválido" }),
@@ -13,9 +14,6 @@ const signInScheme = z.object({
 })
 
 export function SignIn() {
-    // Utilizaremos o useActionState no lugar do useState
-    // const [isLoading, setIsLoading] = useState(false);
-
     // Utilizando useActionState
     // const [state, action, isPending] = useActionState(actionFunction, initialState)
     // state: o valor de estado retornado pela ação (pode ser um objeto com mensagens, erros etc.)
@@ -29,6 +27,8 @@ export function SignIn() {
     // initialState: valor inicial do estado.
 
     const [ state, formAction, isLoading ] = useActionState(signIn, null);
+
+    const auth = useAuth();
 
     async function signIn(prevState: any, formData: FormData) {
         // Novo recurso do react 19 onde podemos recuperar os dados do formulario sem criar estados
@@ -44,6 +44,7 @@ export function SignIn() {
 
             // Realizando o login na API e obtendo token JWT
             const response = await api.post("/Login", data) 
+            auth.save(response.data); // Salvando os dados da session no AuthContext
             
         } catch (error) {
             console.log(error);
@@ -53,7 +54,13 @@ export function SignIn() {
             }
 
             if(error instanceof AxiosError) {
-                return { message: error.response?.data.message }
+                const apiMessages = error.response?.data.errorMessages;
+
+                const messageToShow = Array.isArray(apiMessages) 
+                    ? apiMessages.join('\n') 
+                    : apiMessages;
+
+                return alert(messageToShow || "Erro inesperado do servidor");
             }
 
             return { message: "Não foi possível entrar!" };

@@ -12,13 +12,13 @@ export function Confirm() {
 
     return (
         <div className="bg-gray-500 lg:w-[512px] rounded-xl flex flex-col items-center p-10 gap-6">
-            <h1 className="text-2xl font-bold text-center text-green-100">Transação cadastrada com sucesso!</h1>
+            <h1 className="text-2xl font-bold text-center text-green-100">Cadastro realizado com sucesso!</h1>
 
             <img src={okSvg} alt="Ícone de OK" className="w-28" />
 
             <a href="/" className="w-full p-3 text-center bg-green-100 rounded-lg 
             text-white hover:bg-green-200 transition ease-linear">
-                Nova solicitação
+                Novo cadastro
             </a>
         </div>
     )
