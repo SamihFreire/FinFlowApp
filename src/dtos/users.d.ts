@@ -8,7 +8,14 @@ type UserLoginApiResponse = {
 }
 
 type UsersApiResponse ={
-    users : User[]
+    users : User[],
+    totalCount: number,
+    currentPage: number,
+    pageSize: number,
+    totalPages: number,
+    totalRevenue: number,
+    totalExpense: number,
+    balance: number
 }
 
 type User = {

@@ -7,4 +7,5 @@ type Category = {
     title: string,
     description: string,
     categoryType: number
+    categoryTypeDescription?: string
 }

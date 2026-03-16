@@ -1,4 +1,4 @@
-import { useState, useEffect, use } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate, useParams } from "react-router"
 import { NumericFormat } from 'react-number-format';
 import { z, ZodError } from "zod"
@@ -162,80 +162,8 @@ export function Transaction() {
         getUsers();
     }, []);
 
-    // return (
-    //     <form onSubmit={onSubmit} className="bg-gray-500 w-full rounded-xl flex flex-col p-10 gap-6 lg:min-w-lg">
-    //         <header>
-    //             <h1 className="text-xl font-bold text-gray-100">
-    //                 Cadastro de transação
-    //             </h1>
-                
-    //             <p className="text-sm text-gray-200 mt-2 mb-4">
-    //                 Dados da transação para gestão financeira.
-    //             </p>
-    //         </header>
-
-    //         <Input required legend="Título da transação" value={title} onChange={(e) => setTitle(e.target.value.toUpperCase())} disabled={!!params.id} />
-    //         <TextArea required legend="Descrição" value={description} onChange={(e) => setDescription(e.target.value.toUpperCase())} disabled={!!params.id} />
-
-    //         <div className="flex gap-4">
-    //             <Select required legend="Categoria" value={category} onChange={(e) => setCategory(e.target.value.toUpperCase())} disabled={!!params.id}>
-    //                 {
-    //                     // Percorremos a lista de categorias com suas chaves
-    //                     // Para cada chave de categoria buscamos na lista de categorias o seu nome
-    //                     categories.map((category) => (
-    //                         <option key={category.id} value={category.id}>
-    //                             {category.title}
-    //                         </option>
-    //                     ))
-    //                 }
-    //             </Select>
-
-    //             <Select required legend="Tipo" value={transactionType} onChange={(e) => setTransactionType(e.target.value)} disabled={!!params.id}>
-    //                 {
-    //                     transactionTypeOptions.map((transactionType) => (
-    //                         <option key={transactionType.value} value={transactionType.value}>
-    //                             {transactionType.label}
-    //                         </option>
-    //                     ))
-    //                 }
-    //             </Select>
-
-    //             <NumericFormat customInput={Input} 
-    //                 legend="Valor" 
-    //                 thousandSeparator="." 
-    //                 decimalSeparator="," 
-    //                 prefix="R$ " 
-    //                 decimalScale={2} 
-    //                 fixedDecimalScale
-    //                 allowNegative={false}
-    //                 placeholder="R$ 0,00"
-    //                 onValueChange={(values) => {
-    //                     const { floatValue } = values;
-    //                     setAmount(floatValue); 
-    //                 }}
-    //             />
-    //         </div>
-
-    //         <div className="flex gap-4">
-                
-    //             <Select required legend="Responsável" value={user} onChange={(e) => setUser(e.target.value)} disabled={!!params.id}>
-    //                     {
-    //                         users.map((user) => (
-    //                             <option key={user.id} value={user.id}>
-    //                                 {user.name}
-    //                             </option>
-    //                         ))
-    //                     }
-    //             </Select>
-    //         </div>        
-            
-    //         <Button type="submit" isLoading={isLoading}>{params.id ? "Voltar" : "Enviar"}</Button>
-    //     </form>
-    // )
-
-
     return (
-        <form onSubmit={onSubmit} className="bg-gray-500 w-full rounded-xl flex flex-col p-10 gap-6 lg:min-w-lg">
+        <form onSubmit={onSubmit} className="bg-gray-500 w-full rounded-b-xl flex flex-col p-10 gap-6 lg:min-w-lg">
             <header className="relative">
                 <button 
                     type="button"

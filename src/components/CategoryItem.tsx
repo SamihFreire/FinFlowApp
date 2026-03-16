@@ -1,19 +1,17 @@
-export type TransactionItemProps = {
+export type CategoryItemProps = {
     id: number,
-    user: string
     title: string,
     description: string,
-    amount: string,
-    transactionType: string,
-    category: string
+    categoryType: number
+    categoryTypeDescription?: string
 }
 
 type Props = React.ComponentProps<"a"> & {
-    data: TransactionItemProps
+    data: CategoryItemProps
 }
 
-export function TransactionItem({ data }: Props) {
-    const isExpense = data.transactionType === "Despesa";
+export function CategoryItem({ data }: Props) {
+    const isExpense = data.categoryTypeDescription === "Despesa";
 
     return (
         <div
@@ -26,15 +24,10 @@ export function TransactionItem({ data }: Props) {
             <div className="flex flex-1 flex-col gap-1 min-w-0">
                 <div className="flex items-center justify-between">
                     <strong className="text-sm text-gray-100 uppercase truncate">{data.title}</strong>
-
-                    <div className="text-sm text-gray-100 font-bold whitespace-nowrap ml-4">
-                        <small className="font-normal text-gray-200 mr-1">R$</small>
-                        {data.amount}
-                    </div>
                 </div>
 
                 <span className="text-xxs text-gray-200 uppercase tracking-wider">
-                    {data.category} • {data.user}
+                    {data.categoryTypeDescription}
                 </span>
 
                 <p className="text-xs text-gray-200 leading-relaxed mt-1 text-justify italic opacity-80 line-clamp-3 hover:line-clamp-none transition-all">

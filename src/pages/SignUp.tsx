@@ -69,7 +69,13 @@ export function SignUp() {
             
             // Retornando o erro recebido via API
             if(error instanceof AxiosError) {
-                return alert(error.response?.data.message);
+                const apiMessages = error.response?.data.errorMessages;
+
+                const messageToShow = Array.isArray(apiMessages) 
+                    ? apiMessages.join('\n') 
+                    : apiMessages;
+
+                return alert(messageToShow || "Erro inesperado do servidor");
             }
 
             alert("Não foi possível cadastrar!");
