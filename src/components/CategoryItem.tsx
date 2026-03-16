@@ -12,13 +12,17 @@ type Props = React.ComponentProps<"a"> & {
 
 export function CategoryItem({ data }: Props) {
     const isExpense = data.categoryTypeDescription === "Despesa";
+    const isBoth = data.categoryTypeDescription === "Ambos";
+
+    const typeConfig = {
+        label: isBoth ? "A" : isExpense ? "D" : "C",
+        color: isBoth ? "text-yellow-400" : isExpense ? "text-red-500" : "text-green-100"
+    };
 
     return (
-        <div
-            className="flex items-start gap-4 hover:bg-green-100/5 rounded-md p-3 transition-colors border-b border-gray-400/20"
-        >
-            <div className={`mt-1 shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-gray-400 font-bold ${isExpense ? "text-red-500" : "text-green-100"}`}>
-                {isExpense ? "D" : "C"}
+        <div className="flex items-start gap-4 hover:bg-green-100/5 rounded-md p-3 transition-colors border-b border-gray-400/20">
+            <div className={`mt-1 shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-gray-400 font-bold ${typeConfig.color}`}>
+                {typeConfig.label}
             </div>
 
             <div className="flex flex-1 flex-col gap-1 min-w-0">

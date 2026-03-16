@@ -102,8 +102,10 @@ export function Transaction() {
         try {
             const response = await api.get<CategoriesApiResponse>(`/Category`);
 
+            const apiCategories = response.data?.categories ?? [];
+
             setCategories(
-                response.data.categories.map((category) => ({
+                apiCategories.map((category) => ({
                     id: category.id,
                     title: category.title,
                     description: category.description,

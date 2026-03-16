@@ -98,7 +98,7 @@ export function Categories() {
                 </p>
             </header>
 
-            <Input required legend="Título ada categoria" value={title} onChange={(e) => setTitle(e.target.value.toUpperCase())} disabled={!!params.id} />
+            <Input required legend="Título da categoria" value={title} onChange={(e) => setTitle(e.target.value.toUpperCase())} disabled={!!params.id} />
 
             <TextArea required legend="Descrição" value={description} onChange={(e) => setDescription(e.target.value.toUpperCase())} disabled={!!params.id} />
 
