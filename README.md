@@ -36,7 +36,6 @@ Esta aplicação depende da **FinFlow API** para funcionar. Você pode encontrar
 ![badge-vite]
 ![badge-tailwind]
 ![badge-typescript]
-![badge-jwt]
 
 ## Getting Started
 
